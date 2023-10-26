@@ -12,23 +12,26 @@ function getUserLocation(event) {
   if ('geolocation' in navigator) {
     clickedBtn.disabled = true;
     clickedBtn.innerHTML = '<span class="loader"></span>';
-    navigator.geolocation.getCurrentPosition(function (position) {
-      user.location.lat = position.coords.latitude;
-      user.location.lng = position.coords.longitude;
-      user.location.url = `https://www.bing.com/maps?cp=${user.location.lat}~${user.location.lng}&lvl=15&style=r`;
-      container.insertBefore(
-        document.createTextNode('Location fetched!'),
-        clickedBtn
-      );
-      container.querySelector('svg').classList.add('active');
-      container.removeChild(clickedBtn);
-      container.querySelector('button').disabled = false;
-      container.querySelector('button').classList.add('active');
-    }, () => {
-      displayInfoMessage(
-        'Your browser or permission settings do not allow location fetching.'
-      );
-    });
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        user.location.lat = position.coords.latitude;
+        user.location.lng = position.coords.longitude;
+        user.location.url = `https://www.bing.com/maps?cp=${user.location.lat}~${user.location.lng}&lvl=15&style=r`;
+        container.insertBefore(
+          document.createTextNode('Location fetched!'),
+          clickedBtn
+        );
+        container.querySelector('svg').classList.add('active');
+        container.removeChild(clickedBtn);
+        container.querySelector('button').disabled = false;
+        container.querySelector('button').classList.add('active');
+      },
+      () => {
+        displayInfoMessage(
+          'Your browser or permission settings do not allow location fetching.'
+        );
+      }
+    );
   } else {
     displayInfoMessage(
       'Your browser or permission settings do not allow location fetching.'
