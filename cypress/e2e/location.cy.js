@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('share location', () => {
+describe('share location address', () => {
   beforeEach(() => {
     cy.visit('/').then((win) => {
       cy.stub(win.navigator.geolocation, 'getCurrentPosition')
